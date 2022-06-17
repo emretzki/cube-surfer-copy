@@ -13,22 +13,27 @@ public class Collector : MonoBehaviour
     }
     void Update()
     {
-        
-        MainCube.transform.position = new Vector3(transform.position.x, height + 1 , transform.position.z);
+
+        MainCube.transform.position = new Vector3(transform.position.x, height + 1, transform.position.z);
         this.transform.localPosition = new Vector3(0, -height, 0);
 
+    }
+
+    public void DecreaseHeight()
+    {
+        height--;
     }
 
     private void OnTriggerEnter(Collider other)
     {
 
-        if(other.gameObject.tag == "Collector")
+        if (other.gameObject.tag == "Collector" && other.gameObject.GetComponent<CollectibleCubes>().GetIsCollected()==false)
         {
             height += 1;
             other.gameObject.GetComponent<CollectibleCubes>().Collect();
             other.gameObject.GetComponent<CollectibleCubes>().SetIndex(height);
             other.gameObject.transform.parent = MainCube.transform;
-        }     
-       
+        }
+
     }
 }
