@@ -5,11 +5,8 @@ using UnityEngine;
 public class SwerveMovement : MonoBehaviour
 {
     private SwerveInputSystem _swerveInputSystem;
-
     [SerializeField] private float swerveSpeed = 0.5f;
-    [SerializeField] private float forwardSpeed;
-
-
+    public float forwardSpeed = 8f;  
 
     private void Awake()
     {
@@ -18,9 +15,12 @@ public class SwerveMovement : MonoBehaviour
 
     private void Update()
     {
+        SwerveSettings();
+    }
+    public void SwerveSettings()
+    {   
         float swerveAmount = Time.deltaTime * swerveSpeed * _swerveInputSystem.MoveFactorX;
         transform.Translate(swerveAmount, 0, forwardSpeed * Time.deltaTime);
-        
     }
-
 }
+

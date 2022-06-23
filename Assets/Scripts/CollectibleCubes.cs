@@ -1,20 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CollectibleCubes : MonoBehaviour
 {
 
-    bool isCollected;
-    int index;
+    private bool isCollected;
+    private int index;
     public Collector collector;
-
+       
+      
     void Start()
     {
-
+        
+        isCollected = false;     
     }
+
     void Update()
     {
+
         if (isCollected == true)
         {
             if (transform.parent != null)
@@ -26,14 +31,21 @@ public class CollectibleCubes : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.gameObject.tag == "Obstacle")
         {
-            collector.DecreaseHeight();
+            collector.ObstacleMethod(other);
+        }
+
+        if (other.gameObject.tag == "Finish")
+        {
+
             transform.parent = null;
-            GetComponent<BoxCollider>().enabled = false;
-            other.GetComponent<BoxCollider>().enabled = false;
+            Debug.Log("Collectible cube run");
+
         }
     }
+
 
     public bool GetIsCollected()
     {

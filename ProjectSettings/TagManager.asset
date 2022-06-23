@@ -5,8 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Collector
-  - Collecter
   - Obstacle
+  - Point
+  - finish
+  - Cubes
   layers:
   - Default
   - TransparentFX
