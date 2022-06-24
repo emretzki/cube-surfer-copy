@@ -22,7 +22,7 @@ public class MainCubeCollision : MonoBehaviour
         ResetSpeed(other);
     }
 
-    private void ResetSpeed(Collider other)
+    public void ResetSpeed(Collider other)
     {
         if (other.gameObject.tag == "Obstacle")
         {
@@ -39,8 +39,9 @@ public class MainCubeCollision : MonoBehaviour
             }
         }
 
-        if (other.gameObject.tag == "finish")
+        if (other.gameObject.tag == "Finish")
         {
+            Debug.Log("test");
             gameOver = true;
             swerveMovement.forwardSpeed = 0f;
             if (gameOver)

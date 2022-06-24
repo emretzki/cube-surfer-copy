@@ -9,21 +9,18 @@ public class PointCollector : MonoBehaviour
     public Text pointsText;
     public Text pointsTextGameOver;
     
-    
-
-    void Start()
-    {
-        
-    }
     private void OnTriggerEnter(Collider collision)
     {
 
         if (collision.gameObject.CompareTag("Point"))
         {
-            CalculatePoints(collision);
+            PointCalculator(collision);
         }
     }
-    private void CalculatePoints(Collider collision)
+
+
+    //Calculating and printing points to the UI here
+    private void PointCalculator(Collider collision)
     {
         Destroy(collision.gameObject);
         points++;

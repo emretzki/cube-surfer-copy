@@ -7,14 +7,16 @@ public class CollectibleCubes : MonoBehaviour
 {
 
     private bool isCollected;
-    private int index;
+    private int collectibleIndex;
     public Collector collector;
+   
        
       
     void Start()
     {
         
-        isCollected = false;     
+        isCollected = false;
+        
     }
 
     void Update()
@@ -24,26 +26,29 @@ public class CollectibleCubes : MonoBehaviour
         {
             if (transform.parent != null)
             {
-                transform.localPosition = new Vector3(0, -index, 0);
+                transform.localPosition = new Vector3(0, -collectibleIndex , 0);
             }
         }
     }
 
+    //Jumping from the obstacles.
     private void OnTriggerEnter(Collider other)
     {
 
         if (other.gameObject.tag == "Obstacle")
         {
-            collector.ObstacleMethod(other);
+            collector.JumpFromObstacles(other);
+
         }
 
         if (other.gameObject.tag == "Finish")
         {
 
-            transform.parent = null;
+            //transform.parent = null;
             Debug.Log("Collectible cube run");
 
         }
+
     }
 
 
@@ -57,8 +62,9 @@ public class CollectibleCubes : MonoBehaviour
         isCollected = true;
     }
 
-    public void SetIndex(int index)
+    public void SetIndex(int collectibleIndex)
     {
-        this.index = index;
+        
+        this.collectibleIndex = collectibleIndex;
     }
 }
