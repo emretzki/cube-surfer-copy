@@ -8,7 +8,6 @@ public class FinishLines : MonoBehaviour
     [SerializeField] private float multiplier;
     private PointCollector pointCollector;
     public float finishLineHeight;
-    public float fnishLineMinHeight;
 
     private void OnTriggerEnter(Collider other)
     {

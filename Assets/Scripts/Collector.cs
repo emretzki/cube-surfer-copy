@@ -11,14 +11,13 @@ public class Collector : MonoBehaviour
     private float finishLineSum;
     private float finishLineCollector;
     public List<CollectibleCubes> collectibleCubesList = new List<CollectibleCubes>();
-    private MainCubeCollision mainCubeCollision;
-
+    TriggerEvents triggerEvents;
+    
 
     void Start()
     {
         MainCube = GameObject.Find("MainCube");
-        mainCubeCollision = GetComponent<MainCubeCollision>();
-
+        triggerEvents = this.gameObject.GetComponent<TriggerEvents>();
     }
 
     //Increasing height of the main cube, collecting cube stays bottom.
@@ -27,6 +26,7 @@ public class Collector : MonoBehaviour
 
         MainCube.transform.position = new Vector3(transform.position.x, height + 1, transform.position.z);
         this.transform.localPosition = new Vector3(0, -height, 0);
+
 
         if (finishActivated)
         {
@@ -41,6 +41,7 @@ public class Collector : MonoBehaviour
     //Adding cubes and setting the range of the added cubes.
     private void OnTriggerEnter(Collider other)
     {
+        
 
         if (other.gameObject.tag == "Cubes")
         {
@@ -56,14 +57,13 @@ public class Collector : MonoBehaviour
             }
 
         }
+
         if (other.gameObject.tag == "Finish")
         {
-
-            Debug.Log("Is ENTERED");
-
+           
             if (collectibleCubesList.Count == 0)
             {
-                mainCubeCollision.ResetSpeed(other);
+                
             }
             else
             {
@@ -71,9 +71,10 @@ public class Collector : MonoBehaviour
                 finishActivated = true;
                 finishLines = other.GetComponent<FinishLines>();
                 finishLineSum = finishLines.finishLineHeight;
-                finishLineCollector = finishLines.fnishLineMinHeight;
             }
         }
+
+        
     }
 
     public void JumpFromObstacles(Collider other)
@@ -81,7 +82,7 @@ public class Collector : MonoBehaviour
 
         if (collectibleCubesList.Count == 0)
         {
-            mainCubeCollision.ResetSpeed(other);
+            
         }
         else
         {

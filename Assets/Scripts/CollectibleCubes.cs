@@ -43,10 +43,7 @@ public class CollectibleCubes : MonoBehaviour
 
         if (other.gameObject.tag == "Finish")
         {
-
-            //transform.parent = null;
-            Debug.Log("Collectible cube run");
-
+            
         }
 
     }

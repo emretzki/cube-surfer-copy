@@ -9,6 +9,7 @@ TagManager:
   - Point
   - finish
   - Cubes
+  - Trophy
   layers:
   - Default
   - TransparentFX
