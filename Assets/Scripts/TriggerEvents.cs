@@ -21,12 +21,17 @@ public class TriggerEvents : MonoBehaviour
     {
         if (other.gameObject.tag == "Obstacle")
         {
-            ResetSpeed(other);
+            RestartMethod(other);
         }
-           
+
+        if (other.gameObject.tag == "Finish")
+        {
+            RestartMethod(other);
+        }
+
     }
 
-    public void ResetSpeed(Collider other)
+    public void RestartMethod(Collider other)
     {
 
         gameOver = true;
@@ -44,7 +49,7 @@ public class TriggerEvents : MonoBehaviour
 
         if (other.gameObject.tag == "Finish")
         {
-            Debug.Log("test");
+
             gameOver = true;
             swerveMovement.forwardSpeed = 0f;
             if (gameOver)
@@ -55,6 +60,20 @@ public class TriggerEvents : MonoBehaviour
             else
             {
                 swerveMovement.SwerveSettings();
+            }
+        }
+
+
+        if (other.gameObject.tag == "Trophy")
+        {
+
+            gameOver = true;
+            swerveMovement.forwardSpeed = 0f;
+            if (gameOver)
+            {
+                gameOverPanel.SetActive(false);
+                finishedPanel.SetActive(true);
+                player.transform.position = respawnPoint.transform.position;
             }
         }
     }

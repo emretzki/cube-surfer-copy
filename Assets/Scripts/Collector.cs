@@ -1,37 +1,54 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Collector : MonoBehaviour
 {
-    private GameObject MainCube;
     public int height;
     private bool finishActivated;
     private FinishLines finishLines;
-    private float finishLineSum;
     private float finishLineCollector;
+    private float finishLineSum;
     public List<CollectibleCubes> collectibleCubesList = new List<CollectibleCubes>();
-    TriggerEvents triggerEvents;
-    
+    public TriggerEvents triggerEvents;
+    [SerializeField] private GameObject Player;
+
+
+    private static Collector _instance;
+
+    public static Collector Instance { get { return _instance; } }
+
+
+    private void Awake()
+    {
+        if (_instance != null && _instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+    }
 
     void Start()
     {
-        MainCube = GameObject.Find("MainCube");
-        triggerEvents = this.gameObject.GetComponent<TriggerEvents>();
+
+
     }
 
     //Increasing height of the main cube, collecting cube stays bottom.
     void Update()
     {
 
-        MainCube.transform.position = new Vector3(transform.position.x, height + 1, transform.position.z);
+        Player.transform.position = new Vector3(transform.position.x, height + 1, transform.position.z);
         this.transform.localPosition = new Vector3(0, -height, 0);
 
 
         if (finishActivated)
         {
             Debug.Log("Entered to increase height");
-            MainCube.transform.position = new Vector3(transform.position.x, height + finishLineSum, transform.position.z);
+            Player.transform.position = new Vector3(transform.position.x, height + finishLineSum, transform.position.z);
             this.transform.localPosition = new Vector3(0, -height - finishLineCollector, 0);
         }
 
@@ -41,7 +58,7 @@ public class Collector : MonoBehaviour
     //Adding cubes and setting the range of the added cubes.
     private void OnTriggerEnter(Collider other)
     {
-        
+
 
         if (other.gameObject.tag == "Cubes")
         {
@@ -53,17 +70,17 @@ public class Collector : MonoBehaviour
                 height += 1;
                 collectibleCube.Collect();
                 collectibleCube.SetIndex(height);
-                other.gameObject.transform.parent = MainCube.transform;
+                other.gameObject.transform.parent = Player.transform;
             }
 
         }
 
         if (other.gameObject.tag == "Finish")
         {
-           
+
             if (collectibleCubesList.Count == 0)
             {
-                
+
             }
             else
             {
@@ -74,7 +91,13 @@ public class Collector : MonoBehaviour
             }
         }
 
-        
+        if (other.gameObject.tag == "Trophy")
+        {
+            triggerEvents.RestartMethod(other);
+
+        }
+
+
     }
 
     public void JumpFromObstacles(Collider other)
@@ -82,7 +105,7 @@ public class Collector : MonoBehaviour
 
         if (collectibleCubesList.Count == 0)
         {
-            
+
         }
         else
         {

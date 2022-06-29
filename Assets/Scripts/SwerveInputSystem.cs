@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class SwerveInputSystem : MonoBehaviour
 {
@@ -21,9 +19,9 @@ public class SwerveInputSystem : MonoBehaviour
         else if (Input.GetMouseButton(0))
         {
             _moveFactorX = Input.mousePosition.x - _lastFrameFingerPosition;
-            _lastFrameFingerPosition = Input.mousePosition.x;   
+            _lastFrameFingerPosition = Input.mousePosition.x;
 
-            if(transform.position.x >= xRange)
+            if (transform.position.x >= xRange)
             {
                 transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
             }

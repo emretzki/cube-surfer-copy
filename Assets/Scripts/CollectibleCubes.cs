@@ -8,7 +8,6 @@ public class CollectibleCubes : MonoBehaviour
 
     private bool isCollected;
     private int collectibleIndex;
-    public Collector collector;
    
        
       
@@ -37,7 +36,7 @@ public class CollectibleCubes : MonoBehaviour
 
         if (other.gameObject.tag == "Obstacle")
         {
-            collector.JumpFromObstacles(other);
+            Collector.Instance.JumpFromObstacles(other);
 
         }
 
