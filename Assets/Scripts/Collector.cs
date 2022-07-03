@@ -9,8 +9,9 @@ public class Collector : MonoBehaviour
     private float finishLineCollector;
     private float finishLineSum;
     public List<CollectibleCubes> collectibleCubesList = new List<CollectibleCubes>();
-    public TriggerEvents triggerEvents;
+    public TriggerToFinish triggerEvents;
     [SerializeField] private GameObject Player;
+
 
 
     private static Collector _instance;
@@ -47,7 +48,6 @@ public class Collector : MonoBehaviour
 
         if (finishActivated)
         {
-            Debug.Log("Entered to increase height");
             Player.transform.position = new Vector3(transform.position.x, height + finishLineSum, transform.position.z);
             this.transform.localPosition = new Vector3(0, -height - finishLineCollector, 0);
         }

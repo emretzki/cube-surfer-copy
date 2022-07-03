@@ -5,7 +5,7 @@ using UnityEngine;
 public class FinishLines : MonoBehaviour
 {
 
-    [SerializeField] private float multiplier;
+    [SerializeField] private double multiplier;
     private PointCollector pointCollector;
     public float finishLineHeight;
 
@@ -16,7 +16,6 @@ public class FinishLines : MonoBehaviour
             pointCollector = other.GetComponent<PointCollector>();
             pointCollector.points = multiplier * pointCollector.points;
             pointCollector.pointsText.text = "Points: " + pointCollector.points;
-            pointCollector.pointsTextGameOver.text = "Points: " + pointCollector.points;
         }
     }
 }

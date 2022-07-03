@@ -1,21 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class CollectibleCubes : MonoBehaviour
 {
 
     private bool isCollected;
     private int collectibleIndex;
-   
-       
-      
+
+
+
     void Start()
     {
-        
+
         isCollected = false;
-        
+
     }
 
     void Update()
@@ -25,7 +22,7 @@ public class CollectibleCubes : MonoBehaviour
         {
             if (transform.parent != null)
             {
-                transform.localPosition = new Vector3(0, -collectibleIndex , 0);
+                transform.localPosition = new Vector3(0, -collectibleIndex, 0);
             }
         }
     }
@@ -39,12 +36,6 @@ public class CollectibleCubes : MonoBehaviour
             Collector.Instance.JumpFromObstacles(other);
 
         }
-
-        if (other.gameObject.tag == "Finish")
-        {
-            
-        }
-
     }
 
 
@@ -60,7 +51,7 @@ public class CollectibleCubes : MonoBehaviour
 
     public void SetIndex(int collectibleIndex)
     {
-        
+
         this.collectibleIndex = collectibleIndex;
     }
 }

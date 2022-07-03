@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class PointCollector : MonoBehaviour
 {
-    public float points;
+    public double points;
     public Text pointsText;
     public Text pointsTextGameOver;
-    
+    public Text pointsTextFinished;
+
     private void OnTriggerEnter(Collider collision)
     {
 
@@ -23,7 +24,7 @@ public class PointCollector : MonoBehaviour
     private void PointCalculator(Collider collision)
     {
         Destroy(collision.gameObject);
-        points++;
+        points = points + 1;
         pointsText.text = "Points: " + points;
         pointsTextGameOver.text = "Points: " + points;
 
